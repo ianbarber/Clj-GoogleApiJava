@@ -1,0 +1,26 @@
+# clj-easygoog
+
+Very quick example on calling Google APIs using the Java client libraries from Clojure. Queries the Google+ Public Data API using Simple Authentication. Requires a file in this directory called 'config.clj' containing an API key: 
+
+    (def GOOGLE_API_KEY "KEY_GOES_HERE") 
+    
+The key can be generated from https://developers.google.com/console ("api clients") - this is also where the Google+ service can be enabled ("services").
+
+It should be relatively easy to call any other Google API service using similar constructs. 
+
+Historical Note: In older versions of the Java Google Client Libraries, the API key was stored in an anonymous subclass of the JsonHttpRequestInitializer. If for some reason you require an older version, you can use the (proxy) method to support that:
+
+    (def json-init (proxy [JsonHttpRequestInitializer] []
+       (initialize [httpreq]
+        (.setKey httpreq GOOGLE_API_KEY))))
+
+## Usage
+
+;; Perform a search for activities (posts) on Google+ containing the word "clojure"
+(pprint (search "clojure"))
+
+## License
+
+Copyright (C) 2012 Google
+
+Distributed under the Apache 2.0 license. 
