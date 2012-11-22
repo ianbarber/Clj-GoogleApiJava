@@ -19,7 +19,7 @@
 ;; Query the API using the supplied key
 (defn search [query]
 	;; Perform a query
-	(let [results (-> (.activities anon-plus) (.search "clojure") (.execute))]
+	(let [results (-> (.activities anon-plus) (.search query) (.execute))]
 		;; Print out the results
 		(map #(vector (.getTitle %1) (.getUrl %1)) (.getItems results))))
 
